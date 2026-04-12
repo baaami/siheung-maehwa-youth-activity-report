@@ -4,7 +4,7 @@ import Link from "next/link";
 type AppShellProps = {
   eyebrow: string;
   title: string;
-  description: string;
+  description?: string;
   children: ReactNode;
   actions?: ReactNode;
 };
@@ -27,9 +27,11 @@ export function AppShell({
                 <h1 className="text-3xl font-semibold tracking-tight text-[var(--accent-strong)]">
                   {title}
                 </h1>
-                <p className="max-w-3xl text-sm leading-6 text-[var(--muted)]">
-                  {description}
-                </p>
+                {description ? (
+                  <p className="max-w-3xl text-sm leading-6 text-[var(--muted)]">
+                    {description}
+                  </p>
+                ) : null}
               </div>
             </div>
             <div className="flex flex-wrap items-center gap-3">

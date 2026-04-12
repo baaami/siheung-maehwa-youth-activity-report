@@ -7,7 +7,6 @@ type ReportListTableProps = {
   basePath: string;
   selectable?: boolean;
   showAuthor?: boolean;
-  showStatus?: boolean;
   checkboxName?: string;
 };
 
@@ -16,7 +15,6 @@ export function ReportListTable({
   basePath,
   selectable = false,
   showAuthor = false,
-  showStatus = true,
   checkboxName = "reportIds",
 }: ReportListTableProps) {
   return (
@@ -29,7 +27,6 @@ export function ReportListTable({
             <th className="px-4 py-3">활동명</th>
             <th className="px-4 py-3">참여 인원</th>
             {showAuthor ? <th className="px-4 py-3">작성자</th> : null}
-            {showStatus ? <th className="px-4 py-3">상태</th> : null}
             <th className="px-4 py-3">PDF</th>
             <th className="px-4 py-3">상세</th>
           </tr>
@@ -52,9 +49,6 @@ export function ReportListTable({
               <td className="px-4 py-3 font-medium">{report.title}</td>
               <td className="px-4 py-3">{totalParticipants(report.participants)}명</td>
               {showAuthor ? <td className="px-4 py-3">{report.authorName}</td> : null}
-              {showStatus ? (
-                <td className="px-4 py-3">{report.status === "SUBMITTED" ? "제출" : "미제출"}</td>
-              ) : null}
               <td className="px-4 py-3">
                 {report.status !== "SUBMITTED" ? (
                   <span className="text-xs font-semibold text-[var(--muted)]">제출 후 가능</span>

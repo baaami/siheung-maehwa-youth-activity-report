@@ -87,6 +87,7 @@ function applyReportInput(report: ActivityReport, input: EditableReportInput, st
   report.participants = input.participants;
   report.activities = [];
   report.rating = input.rating;
+  report.nextActivityDate = input.nextActivityDate;
   report.nextActivityContent = input.nextActivityContent.trim();
   report.suggestions = input.suggestions.trim();
   report.status = status;
@@ -240,7 +241,7 @@ export async function createReportForStudent({
     photos,
     activities: [],
     rating: input.rating,
-    nextActivityDate: "",
+    nextActivityDate: input.nextActivityDate,
     nextActivityContent: input.nextActivityContent.trim(),
     suggestions: input.suggestions.trim(),
     pdfTruncated: false,

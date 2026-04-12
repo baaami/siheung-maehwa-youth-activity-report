@@ -25,7 +25,6 @@ export default async function EditStudentReportPage({
     <AppShell
       eyebrow="Student / Edit"
       title={`${report.title} 수정`}
-      description="학생은 제출 전 상태에서만 수정할 수 있습니다. 수정 시 updatedAt 비교로 동시 수정 충돌을 감지합니다."
     >
       <ReportForm
         club={club}

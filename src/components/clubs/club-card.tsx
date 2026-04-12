@@ -3,7 +3,7 @@ import Link from "next/link";
 type ClubCardProps = {
   href: string;
   name: string;
-  description: string;
+  description?: string;
   meta: string;
 };
 
@@ -16,7 +16,7 @@ export function ClubCard({ href, name, description, meta }: ClubCardProps) {
       <div className="space-y-2">
         <p className="section-title">{meta}</p>
         <h2 className="text-xl font-semibold text-[var(--accent-strong)]">{name}</h2>
-        <p className="text-sm leading-6 text-[var(--muted)]">{description}</p>
+        {description ? <p className="text-sm leading-6 text-[var(--muted)]">{description}</p> : null}
       </div>
       <p className="text-sm font-medium text-[var(--accent)]">상세 보기</p>
     </Link>

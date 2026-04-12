@@ -22,7 +22,6 @@ export default async function AdminClubPage({
     <AppShell
       eyebrow="Admin / Club"
       title={club.name}
-      description="동아리별 활동일지와 PDF 상태를 확인할 수 있습니다."
       actions={
         <div className="flex gap-3">
           <Link
@@ -40,27 +39,11 @@ export default async function AdminClubPage({
         </div>
       }
     >
-      <div className="space-y-6">
-        <div className="grid gap-4 md:grid-cols-3">
-          <SummaryCard label="전체" value={`${reports.length}건`} />
-          <SummaryCard label="제출" value={`${reports.filter((report) => report.status === "SUBMITTED").length}건`} />
-          <SummaryCard label="PDF 가능" value={`${reports.filter((report) => report.status === "SUBMITTED").length}건`} />
-        </div>
-        <ReportListTable
-          reports={reports}
-          basePath={`/admin/clubs/${club.id}/reports`}
-          showAuthor
-        />
-      </div>
+      <ReportListTable
+        reports={reports}
+        basePath={`/admin/clubs/${club.id}/reports`}
+        showAuthor
+      />
     </AppShell>
-  );
-}
-
-function SummaryCard({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="app-card rounded-[22px] p-5">
-      <p className="section-title">{label}</p>
-      <p className="mt-3 text-3xl font-semibold text-[var(--accent-strong)]">{value}</p>
-    </div>
   );
 }

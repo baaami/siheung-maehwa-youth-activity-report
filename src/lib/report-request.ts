@@ -45,6 +45,7 @@ export function parseReportFormData(formData: FormData): {
     reflection: String(formData.get("reflection") ?? ""),
     participants,
     rating: Number(formData.get("rating") ?? 0),
+    nextActivityDate: String(formData.get("nextActivityDate") ?? ""),
     nextActivityContent: String(formData.get("nextActivityContent") ?? ""),
     suggestions: String(formData.get("suggestions") ?? ""),
   };

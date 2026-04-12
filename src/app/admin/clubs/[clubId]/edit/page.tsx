@@ -19,7 +19,6 @@ export default async function AdminEditClubPage({
     <AppShell
       eyebrow="Admin / Club Edit"
       title={`${club.name} 수정`}
-      description="동아리 정보 수정과 삭제를 진행할 수 있습니다."
     >
       <ClubForm mode="edit" club={club} />
     </AppShell>

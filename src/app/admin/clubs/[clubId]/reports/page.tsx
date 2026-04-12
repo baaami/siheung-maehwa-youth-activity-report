@@ -30,7 +30,6 @@ export default async function AdminReportsPage({
     <AppShell
       eyebrow="Admin / Reports"
       title={`${club.name} 활동일지 관리`}
-      description="연도 기준은 reportDate를 사용합니다. 제출된 활동일지만 선택해 PDF로 다운로드할 수 있습니다."
       actions={filteredReports[0] || reports[0] ? (
         <Link
           href={`/reports/${filteredReports[0]?.id ?? reports[0]?.id}/print`}
@@ -83,7 +82,6 @@ export default async function AdminReportsPage({
             basePath={`/admin/clubs/${club.id}/reports`}
             selectable
             showAuthor
-            showStatus={false}
           />
         </form>
       </div>

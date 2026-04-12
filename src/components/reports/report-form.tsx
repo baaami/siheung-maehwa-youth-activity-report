@@ -7,7 +7,6 @@ import { createEmptyParticipant, formatTimeRange, reportCharacterState } from "@
 import type { ActivityReport, Club } from "@/lib/types";
 import { ParticipantStatsTable } from "@/components/reports/participant-stats-table";
 import { ParticipantTable } from "@/components/reports/participant-table";
-import { PdfTruncatedAlert } from "@/components/reports/pdf-truncated-alert";
 
 type ReportFormProps = {
   club: Club;
@@ -16,6 +15,7 @@ type ReportFormProps = {
   readOnly?: boolean;
   submitEndpoint?: string;
   backHref?: string;
+  onCancelEdit?: () => void;
 };
 
 type FormState = {
@@ -28,6 +28,7 @@ type FormState = {
   reflection: string;
   participants: ActivityReport["participants"];
   rating: number;
+  nextActivityDate: string;
   nextActivityContent: string;
   suggestions: string;
 };
@@ -43,6 +44,7 @@ function toFormState(report: ActivityReport): FormState {
     reflection: report.reflection,
     participants: report.participants,
     rating: report.rating,
+    nextActivityDate: report.nextActivityDate,
     nextActivityContent: report.nextActivityContent,
     suggestions: report.suggestions,
   };
@@ -55,6 +57,7 @@ export function ReportForm({
   readOnly = false,
   submitEndpoint,
   backHref,
+  onCancelEdit,
 }: ReportFormProps) {
   const router = useRouter();
   const [form, setForm] = useState<FormState>(() => toFormState(report));
@@ -78,6 +81,7 @@ export function ReportForm({
     formData.set("reflection", form.reflection);
     formData.set("participants", JSON.stringify(form.participants));
     formData.set("rating", String(form.rating));
+    formData.set("nextActivityDate", form.nextActivityDate);
     formData.set("nextActivityContent", form.nextActivityContent);
     formData.set("suggestions", form.suggestions);
     formData.set("existingPhotos", JSON.stringify(existingPhotos));
@@ -123,85 +127,50 @@ export function ReportForm({
         event.preventDefault();
       }}
     >
-      <div className="grid gap-6 xl:grid-cols-[1.3fr_0.7fr]">
-        <section className="app-card rounded-[24px] p-6">
-          <div className="mb-5 flex items-center justify-between">
-            <div>
-              <p className="section-title">기본 정보</p>
-              <h2 className="mt-2 text-2xl font-semibold text-[var(--accent-strong)]">
-                {mode === "student" ? "활동일지 작성" : "관리자 수정"}
-              </h2>
-            </div>
-            <span className="rounded-full bg-[var(--surface-strong)] px-3 py-1 text-xs font-semibold text-[var(--accent)]">
-              {mode === "student" ? "학생 입력 화면" : "관리자 수정 화면"}
-            </span>
+      <section className="app-card rounded-[24px] p-6">
+        <div className="mb-5 flex items-center justify-between">
+          <div>
+            <h2 className="text-2xl font-semibold text-[var(--accent-strong)]">
+              기본 정보
+            </h2>
           </div>
-          <div className="grid gap-4 md:grid-cols-2">
-            <Field label="동아리명" value={`${club.category} ${club.name}`} readOnly />
-            <Field label="작성자" value={report.authorName} readOnly />
-            <Field
-              label="활동일자"
-              value={form.reportDate}
-              onChange={(value) => setForm((current) => ({ ...current, reportDate: value }))}
-              type="date"
-            />
-            <Field
-              label="활동장소"
-              value={form.place}
-              onChange={(value) => setForm((current) => ({ ...current, place: value }))}
-            />
-            <Field
-              label="시작 시간"
-              value={form.startTime}
-              onChange={(value) => setForm((current) => ({ ...current, startTime: value }))}
-              type="time"
-            />
-            <Field
-              label="종료 시간"
-              value={form.endTime}
-              onChange={(value) => setForm((current) => ({ ...current, endTime: value }))}
-              type="time"
-            />
-          </div>
-        </section>
-
-        <section className="app-card rounded-[24px] p-6">
-          <div className="space-y-2">
-            <p className="section-title">활동평가</p>
-            <h2 className="text-2xl font-semibold text-[var(--accent-strong)]">오늘 활동 만족도</h2>
-          </div>
-          <div className="mt-5 flex gap-2">
-            {[1, 2, 3, 4, 5].map((score) => (
-              <button
-                key={score}
-                type="button"
-                className={`rounded-full px-3 py-2 text-sm font-semibold ${
-                  form.rating >= score
-                    ? "bg-[var(--accent)] text-white"
-                    : "border border-[var(--line)] bg-[var(--surface)] text-[var(--muted)]"
-                }`}
-                onClick={() => setForm((current) => ({ ...current, rating: score }))}
-              >
-                {score}점
-              </button>
-            ))}
-          </div>
-          <div className="mt-6 space-y-3">
-            <StatusRow label="사진 개수" value={`${[0, 1].filter((index) => photoFiles[index] || existingPhotos[index]).length}/2`} />
-            <StatusRow label="출력 시간" value={formatTimeRange(form.startTime, form.endTime)} />
-            <StatusRow label="마지막 저장 시각" value={report.updatedAt.slice(0, 16).replace("T", " ")} />
-          </div>
-          <div className="mt-6">
-            <PdfTruncatedAlert truncated={report.pdfTruncated} note={report.pdfTruncationNote} />
-          </div>
-        </section>
-      </div>
+          <span className="rounded-full bg-[var(--surface-strong)] px-3 py-1 text-xs font-semibold text-[var(--accent)]">
+            {mode === "student" ? "학생 입력 화면" : "관리자 수정 화면"}
+          </span>
+        </div>
+        <div className="grid gap-4 md:grid-cols-2">
+          <Field label="동아리명" value={`${club.category} ${club.name}`} readOnly />
+          <Field label="작성자" value={report.authorName} readOnly />
+          <Field
+            label="활동일자"
+            value={form.reportDate}
+            onChange={(value) => setForm((current) => ({ ...current, reportDate: value }))}
+            type="date"
+          />
+          <Field
+            label="활동장소"
+            value={form.place}
+            onChange={(value) => setForm((current) => ({ ...current, place: value }))}
+          />
+          <Field
+            label="시작 시간"
+            value={form.startTime}
+            onChange={(value) => setForm((current) => ({ ...current, startTime: value }))}
+            type="time"
+          />
+          <Field
+            label="종료 시간"
+            value={form.endTime}
+            onChange={(value) => setForm((current) => ({ ...current, endTime: value }))}
+            type="time"
+          />
+        </div>
+      </section>
 
       <section className="app-card rounded-[24px] p-6">
         <div className="mb-5 flex items-center justify-between">
           <div className="space-y-2">
-            <p className="section-title">참가자</p>
-            <h2 className="text-2xl font-semibold text-[var(--accent-strong)]">자동 집계 기준 명단</h2>
+            <h2 className="text-2xl font-semibold text-[var(--accent-strong)]">개별 입력과 자동 집계</h2>
           </div>
           <button
             type="button"
@@ -286,12 +255,9 @@ export function ReportForm({
         </div>
       </section>
 
-      <section className="grid gap-6 xl:grid-cols-2">
+      <section className="grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
         <div className="app-card rounded-[24px] p-6">
-          <div className="space-y-2">
-            <p className="section-title">활동 정보</p>
-            <h2 className="text-2xl font-semibold text-[var(--accent-strong)]">활동명과 본문</h2>
-          </div>
+          <h2 className="text-2xl font-semibold text-[var(--accent-strong)]">활동 내용</h2>
           <div className="mt-4 space-y-4">
             <Field
               label="활동명"
@@ -302,14 +268,12 @@ export function ReportForm({
               label="활동내용"
               value={form.content}
               onChange={(value) => setForm((current) => ({ ...current, content: value }))}
-              helper="공백 포함 200자 이상 300자 이하로 작성해주세요."
             />
             <CharacterHint text={form.content} />
             <TextAreaField
               label="활동소감"
               value={form.reflection}
               onChange={(value) => setForm((current) => ({ ...current, reflection: value }))}
-              helper="참여자 반응과 느낀 점을 자연스럽게 정리해주세요."
             />
             <CharacterHint text={form.reflection} />
           </div>
@@ -317,13 +281,36 @@ export function ReportForm({
 
         <div className="space-y-6">
           <div className="app-card rounded-[24px] p-6">
-            <div className="space-y-2">
-              <p className="section-title">다음 활동</p>
-              <h2 className="text-2xl font-semibold text-[var(--accent-strong)]">다음 활동 한 줄 메모</h2>
+            <h2 className="text-2xl font-semibold text-[var(--accent-strong)]">활동 평가</h2>
+            <div className="mt-5 flex gap-2">
+              {[1, 2, 3, 4, 5].map((score) => (
+                <button
+                  key={score}
+                  type="button"
+                  className={`rounded-full px-3 py-2 text-sm font-semibold ${
+                    form.rating >= score
+                      ? "bg-[var(--accent)] text-white"
+                      : "border border-[var(--line)] bg-[var(--surface)] text-[var(--muted)]"
+                  }`}
+                  onClick={() => setForm((current) => ({ ...current, rating: score }))}
+                >
+                  {score}점
+                </button>
+              ))}
             </div>
-            <div className="mt-4">
+          </div>
+
+          <div className="app-card rounded-[24px] p-6">
+            <h2 className="text-2xl font-semibold text-[var(--accent-strong)]">다음 활동</h2>
+            <div className="mt-4 space-y-4">
               <Field
-                label="다음 활동"
+                label="다음 활동 일자"
+                value={form.nextActivityDate}
+                onChange={(value) => setForm((current) => ({ ...current, nextActivityDate: value }))}
+                type="date"
+              />
+              <Field
+                label="다음 활동 메모"
                 value={form.nextActivityContent}
                 onChange={(value) => setForm((current) => ({ ...current, nextActivityContent: value }))}
               />
@@ -331,10 +318,7 @@ export function ReportForm({
           </div>
 
           <div className="app-card rounded-[24px] p-6">
-            <div className="space-y-2">
-              <p className="section-title">건의사항</p>
-              <h2 className="text-2xl font-semibold text-[var(--accent-strong)]">지도사에게 남길 메모</h2>
-            </div>
+            <h2 className="text-2xl font-semibold text-[var(--accent-strong)]">건의 사항</h2>
             <div className="mt-4">
               <TextAreaField
                 label="건의사항"
@@ -347,10 +331,7 @@ export function ReportForm({
       </section>
 
       <section className="app-card rounded-[24px] p-6">
-        <div className="mb-5 space-y-2">
-          <p className="section-title">사진</p>
-          <h2 className="text-2xl font-semibold text-[var(--accent-strong)]">정확히 2장 업로드</h2>
-        </div>
+        <h2 className="mb-5 text-2xl font-semibold text-[var(--accent-strong)]">활동 사진</h2>
         <div className="grid gap-4 md:grid-cols-2">
           {[0, 1].map((index) => {
             const nextFile = photoFiles[index];
@@ -403,7 +384,15 @@ export function ReportForm({
       ) : null}
 
       <div className="flex flex-wrap items-center gap-3">
-        {backHref ? (
+        {onCancelEdit ? (
+          <button
+            type="button"
+            className="rounded-full border border-[var(--line)] px-4 py-2 text-sm font-semibold text-[var(--muted)]"
+            onClick={onCancelEdit}
+          >
+            취소
+          </button>
+        ) : backHref ? (
           <button
             type="button"
             className="rounded-full border border-[var(--line)] px-4 py-2 text-sm font-semibold text-[var(--muted)]"
@@ -426,7 +415,7 @@ export function ReportForm({
           disabled={isSubmitting}
           onClick={() => void submit("SUBMITTED")}
         >
-          {isSubmitting ? "제출 중..." : "제출"}
+          {isSubmitting ? "완료 중..." : "완료"}
         </button>
       </div>
     </form>
@@ -444,49 +433,27 @@ function ReportReadOnlyContent({
 }) {
   return (
     <div className="space-y-6">
-      <div className="grid gap-6 xl:grid-cols-[1.3fr_0.7fr]">
-        <section className="app-card rounded-[24px] p-6">
-          <div className="mb-5 flex items-center justify-between">
-            <div>
-              <p className="section-title">기본 정보</p>
-              <h2 className="mt-2 text-2xl font-semibold text-[var(--accent-strong)]">활동일지 상세</h2>
-            </div>
-            <span className="rounded-full bg-[var(--surface-strong)] px-3 py-1 text-xs font-semibold text-[var(--accent)]">
-              {mode === "student" ? "학생 읽기 화면" : "관리자 읽기 화면"}
-            </span>
+      <section className="app-card rounded-[24px] p-6">
+        <div className="mb-5 flex items-center justify-between">
+          <div>
+            <h2 className="text-2xl font-semibold text-[var(--accent-strong)]">기본 정보</h2>
           </div>
-          <div className="grid gap-4 md:grid-cols-2">
-            <DisplayField label="동아리명" value={`${club.category} ${club.name}`} />
-            <DisplayField label="작성자" value={report.authorName} />
-            <DisplayField label="활동일자" value={report.reportDate} />
-            <DisplayField label="활동장소" value={report.place} />
-            <DisplayField label="활동시간" value={formatTimeRange(report.startTime, report.endTime)} />
-            <DisplayField label="활동명" value={report.title} />
-          </div>
-          <div className="mt-4 grid gap-4">
-            <DisplayTextArea label="활동내용" value={report.content} />
-            <CharacterHint text={report.content} />
-            <DisplayTextArea label="활동소감" value={report.reflection} />
-            <CharacterHint text={report.reflection} />
-          </div>
-        </section>
-
-        <section className="app-card rounded-[24px] p-6">
-          <div className="space-y-3">
-            <p className="section-title">활동평가</p>
-            <StatusRow label="평가 점수" value={`${report.rating} / 5`} />
-            <StatusRow label="다음 활동" value={report.nextActivityContent || "(정보 필요)"} />
-            <StatusRow label="최종 갱신" value={report.updatedAt.slice(0, 16).replace("T", " ")} />
-          </div>
-          <div className="mt-6">
-            <PdfTruncatedAlert truncated={report.pdfTruncated} note={report.pdfTruncationNote} />
-          </div>
-        </section>
-      </div>
+          <span className="rounded-full bg-[var(--surface-strong)] px-3 py-1 text-xs font-semibold text-[var(--accent)]">
+            {mode === "student" ? "학생 읽기 화면" : "관리자 읽기 화면"}
+          </span>
+        </div>
+        <div className="grid gap-4 md:grid-cols-2">
+          <DisplayField label="동아리명" value={`${club.category} ${club.name}`} />
+          <DisplayField label="작성자" value={report.authorName} />
+          <DisplayField label="활동일자" value={report.reportDate} />
+          <DisplayField label="활동장소" value={report.place} />
+          <DisplayField label="활동시간" value={formatTimeRange(report.startTime, report.endTime)} />
+          <DisplayField label="활동명" value={report.title} />
+        </div>
+      </section>
 
       <section className="app-card rounded-[24px] p-6">
         <div className="mb-5 space-y-2">
-          <p className="section-title">참가자</p>
           <h2 className="text-2xl font-semibold text-[var(--accent-strong)]">개별 입력 기준 자동 집계</h2>
         </div>
         <div className="grid gap-6 xl:grid-cols-[0.8fr_1.2fr]">
@@ -495,22 +462,39 @@ function ReportReadOnlyContent({
         </div>
       </section>
 
-      <section className="grid gap-6 xl:grid-cols-2">
+      <section className="grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
         <div className="app-card rounded-[24px] p-6">
-          <p className="section-title">다음 활동</p>
-          <p className="mt-4 text-sm leading-6 text-[var(--muted)]">{report.nextActivityContent || "(정보 필요)"}</p>
+          <h2 className="text-2xl font-semibold text-[var(--accent-strong)]">활동 내용</h2>
+          <div className="mt-4 space-y-4">
+            <DisplayField label="활동명" value={report.title} />
+            <DisplayTextArea label="활동내용" value={report.content} />
+            <CharacterHint text={report.content} />
+            <DisplayTextArea label="활동소감" value={report.reflection} />
+            <CharacterHint text={report.reflection} />
+          </div>
         </div>
-        <div className="app-card rounded-[24px] p-6">
-          <p className="section-title">건의사항</p>
-          <p className="mt-4 text-sm leading-6 text-[var(--muted)]">{report.suggestions || "(정보 필요)"}</p>
+
+        <div className="space-y-6">
+          <div className="app-card rounded-[24px] p-6">
+            <h2 className="text-2xl font-semibold text-[var(--accent-strong)]">활동 평가</h2>
+            <p className="mt-4 text-sm font-semibold text-[var(--accent-strong)]">{report.rating} / 5</p>
+          </div>
+          <div className="app-card rounded-[24px] p-6">
+            <h2 className="text-2xl font-semibold text-[var(--accent-strong)]">다음 활동</h2>
+            <p className="mt-4 text-sm font-semibold text-[var(--accent-strong)]">
+              {report.nextActivityDate || "(정보 필요)"}
+            </p>
+            <p className="mt-2 text-sm leading-6 text-[var(--muted)]">{report.nextActivityContent || "(정보 필요)"}</p>
+          </div>
+          <div className="app-card rounded-[24px] p-6">
+            <h2 className="text-2xl font-semibold text-[var(--accent-strong)]">건의 사항</h2>
+            <p className="mt-4 text-sm leading-6 text-[var(--muted)]">{report.suggestions || "(정보 필요)"}</p>
+          </div>
         </div>
       </section>
 
       <section className="app-card rounded-[24px] p-6">
-        <div className="mb-5 space-y-2">
-          <p className="section-title">사진</p>
-          <h2 className="text-2xl font-semibold text-[var(--accent-strong)]">활동 기록 사진</h2>
-        </div>
+        <h2 className="mb-5 text-2xl font-semibold text-[var(--accent-strong)]">활동 사진</h2>
         <div className="grid gap-4 md:grid-cols-2">
           {report.photos.map((photo) => (
             <div key={photo.id} className="rounded-[20px] border border-[var(--line)] bg-white p-4">
@@ -592,12 +576,10 @@ function TextAreaField({
   label,
   value,
   onChange,
-  helper,
 }: {
   label: string;
   value: string;
   onChange: (value: string) => void;
-  helper?: string;
 }) {
   return (
     <label className="space-y-2">
@@ -608,7 +590,6 @@ function TextAreaField({
         rows={6}
         className="w-full rounded-[24px] border border-[var(--line)] bg-white px-4 py-3 text-sm leading-6 outline-none transition focus:border-[var(--accent)]"
       />
-      {helper ? <p className="text-xs text-[var(--muted)]">{helper}</p> : null}
     </label>
   );
 }
@@ -644,14 +625,5 @@ function CharacterHint({ text }: { text: string }) {
     <p className={`text-xs font-medium ${tone}`}>
       공백 포함 {text.length}자 / 기준 상태: {state}
     </p>
-  );
-}
-
-function StatusRow({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="flex items-center justify-between rounded-2xl border border-[var(--line)] bg-white px-4 py-3 text-sm">
-      <span className="text-[var(--muted)]">{label}</span>
-      <span className="font-semibold text-[var(--foreground)]">{value}</span>
-    </div>
   );
 }

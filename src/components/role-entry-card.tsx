@@ -3,15 +3,15 @@ import Link from "next/link";
 type RoleEntryCardProps = {
   href: string;
   title: string;
-  description: string;
-  bullets: string[];
+  description?: string;
+  bullets?: string[];
 };
 
 export function RoleEntryCard({
   href,
   title,
   description,
-  bullets,
+  bullets = [],
 }: RoleEntryCardProps) {
   return (
     <Link
@@ -24,16 +24,18 @@ export function RoleEntryCard({
         </div>
         <div className="space-y-2">
           <h2 className="text-2xl font-semibold text-[var(--accent-strong)]">{title}</h2>
-          <p className="text-sm leading-6 text-[var(--muted)]">{description}</p>
+          {description ? <p className="text-sm leading-6 text-[var(--muted)]">{description}</p> : null}
         </div>
       </div>
-      <div className="mt-8 space-y-2">
-        {bullets.map((bullet) => (
-          <p key={bullet} className="text-sm leading-6 text-[var(--foreground)]">
-            {bullet}
-          </p>
-        ))}
-      </div>
+      {bullets.length > 0 ? (
+        <div className="mt-8 space-y-2">
+          {bullets.map((bullet) => (
+            <p key={bullet} className="text-sm leading-6 text-[var(--foreground)]">
+              {bullet}
+            </p>
+          ))}
+        </div>
+      ) : null}
     </Link>
   );
 }

@@ -22,7 +22,6 @@ export default async function StudentClubPage({
     <AppShell
       eyebrow="Student / Club"
       title={club.name}
-      description={club.description}
       actions={
         <Link
           href={`/student/clubs/${club.id}/reports/new`}
@@ -33,10 +32,12 @@ export default async function StudentClubPage({
       }
     >
       <div className="space-y-6">
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-4 md:grid-cols-2">
           <SummaryCard label="활동일지 수" value={`${reports.length}건`} />
-          <SummaryCard label="제출 완료" value={`${reports.filter((report) => report.status === "SUBMITTED").length}건`} />
-          <SummaryCard label="미제출" value={`${reports.filter((report) => report.status === "DRAFT").length}건`} />
+          <SummaryCard
+            label="가장 최근 활동일"
+            value={reports[0]?.reportDate ? reports[0].reportDate : "기록 없음"}
+          />
         </div>
         <ReportListTable
           reports={reports}

@@ -18,22 +18,10 @@ export default function Home() {
           <RoleEntryCard
             href="/student"
             title="학생 진입"
-            description="소속 동아리를 고르고 활동일지를 작성하거나 제출 후 읽기 전용으로 확인합니다."
-            bullets={[
-              "2열 동아리 선택",
-              "참가자 자동 집계",
-              "사진 2장 파일 업로드",
-            ]}
           />
           <RoleEntryCard
             href="/admin"
             title="관리자 진입"
-            description="전체 동아리를 관리하고 보고서 수정, 사진 다운로드, PDF 묶음 다운로드를 수행합니다."
-            bullets={[
-              "연도별 보고서 필터",
-              "개별 사진 다운로드",
-              "다중 PDF 다운로드",
-            ]}
           />
         </section>
       </div>

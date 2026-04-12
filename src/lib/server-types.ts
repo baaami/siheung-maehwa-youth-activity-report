@@ -16,6 +16,7 @@ export type EditableReportInput = {
   reflection: string;
   participants: ActivityReport["participants"];
   rating: number;
+  nextActivityDate: string;
   nextActivityContent: string;
   suggestions: string;
 };

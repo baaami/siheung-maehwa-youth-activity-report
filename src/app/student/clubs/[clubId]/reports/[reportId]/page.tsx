@@ -26,7 +26,6 @@ export default async function StudentReportDetailPage({
     <AppShell
       eyebrow="Student / Report"
       title={report.title}
-      description="제출 전에는 수정 화면으로 이동할 수 있고, 제출 후에는 읽기 전용으로 유지됩니다."
       actions={
         report.status === "DRAFT" ? (
           <Link
