@@ -1,5 +1,4 @@
 import { notFound } from "next/navigation";
-import { AppShell } from "@/components/layout/app-shell";
 import { AdminReportDetailClient } from "@/components/reports/admin-report-detail-client";
 import { getClubById, getReportById } from "@/lib/repository";
 
@@ -22,14 +21,10 @@ export default async function AdminReportDetailPage({
   }
 
   return (
-    <AppShell
-      title={report.title}
-    >
-      <AdminReportDetailClient
-        club={club}
-        report={report}
-        backHref={`/admin/clubs/${clubId}/reports`}
-      />
-    </AppShell>
+    <AdminReportDetailClient
+      club={club}
+      report={report}
+      backHref={`/admin/clubs/${clubId}/reports`}
+    />
   );
 }

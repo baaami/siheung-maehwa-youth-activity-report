@@ -233,11 +233,10 @@
       "nextActivityDate": "2026-04-12",
       "nextActivityContent": "센터 야외 공간에서 자연광 촬영과 보정 실습을 진행한다.",
       "suggestions": "삼각대 수량이 조금 더 확보되면 초반 준비 시간이 줄어들 것 같다.",
-      "pdfTruncated": true,
+      "pdfTruncated": false,
       "createdAt": "2026-04-12T09:00:00+09:00",
       "updatedAt": "2026-04-12T09:00:00+09:00",
-      "pdfTruncationNote": "출력 내용이 1페이지 높이를 초과했습니다.",
-      "pdfCheckedAt": "2026-04-12T13:04:09.633Z"
+      "pdfCheckedAt": "2026-04-12T14:00:15.158Z"
     },
     {
       "id": "report-maeil-001",

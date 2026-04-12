@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
+import { AppShell } from "@/components/layout/app-shell";
 import { ReportForm } from "@/components/reports/report-form";
 import type { ActivityReport, Club } from "@/lib/types";
 
@@ -20,9 +20,11 @@ export function StudentReportDetailClient({
   const formId = `student-report-form-${report.id}`;
 
   return (
-    <div className="space-y-4">
-      <div className="flex flex-wrap gap-3">
-        {isEditing ? (
+    <AppShell
+      title={report.title}
+      backHref={backHref}
+      actions={
+        isEditing ? (
           <button
             type="submit"
             form={formId}
@@ -38,15 +40,9 @@ export function StudentReportDetailClient({
           >
             수정
           </button>
-        )}
-        <Link
-          href={backHref}
-          className="rounded-full border border-[var(--line)] px-4 py-2 text-sm font-semibold text-[var(--muted)]"
-        >
-          뒤로 가기
-        </Link>
-      </div>
-
+        )
+      }
+    >
       <ReportForm
         club={club}
         report={report}
@@ -56,6 +52,6 @@ export function StudentReportDetailClient({
         formId={formId}
         showFooterActions={false}
       />
-    </div>
+    </AppShell>
   );
 }

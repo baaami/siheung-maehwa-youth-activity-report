@@ -34,6 +34,7 @@ export function AppShell({
               </div>
             </div>
             <div className="flex flex-wrap items-center gap-3">
+              {actions}
               {backHref ? (
                 <Link
                   href={backHref}
@@ -42,7 +43,6 @@ export function AppShell({
                   뒤로 가기
                 </Link>
               ) : null}
-              {actions}
             </div>
           </div>
         </header>
