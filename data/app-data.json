@@ -1,0 +1,316 @@
+{
+  "users": [
+    {
+      "id": "student-1",
+      "name": "김하늘",
+      "role": "student"
+    },
+    {
+      "id": "student-2",
+      "name": "박준서",
+      "role": "student"
+    },
+    {
+      "id": "admin-1",
+      "name": "정민 지도사",
+      "role": "admin"
+    }
+  ],
+  "clubs": [
+    {
+      "id": "club-focus",
+      "name": "포커스",
+      "category": "사진동아리",
+      "description": "사진 촬영과 보정, 전시 준비를 함께하는 동아리",
+      "studentIds": [
+        "student-1"
+      ],
+      "createdAt": "2026-04-12T09:00:00+09:00",
+      "updatedAt": "2026-04-12T09:00:00+09:00"
+    },
+    {
+      "id": "club-maeil",
+      "name": "매일",
+      "category": "청년서포터즈",
+      "description": "지역 활동과 캠페인을 기획하는 청년 서포터즈",
+      "studentIds": [
+        "student-1"
+      ],
+      "createdAt": "2026-04-12T09:00:00+09:00",
+      "updatedAt": "2026-04-12T09:00:00+09:00"
+    },
+    {
+      "id": "club-all-rise",
+      "name": "올-라이즈",
+      "category": "스포트 동아리",
+      "description": "생활 체육과 협동 프로그램을 운영하는 스포츠 동아리",
+      "studentIds": [
+        "student-1"
+      ],
+      "createdAt": "2026-04-12T09:00:00+09:00",
+      "updatedAt": "2026-04-12T09:00:00+09:00"
+    },
+    {
+      "id": "club-crema",
+      "name": "크레마",
+      "category": "바리스타동아리",
+      "description": "커피 추출과 메뉴 개발을 실습하는 바리스타 동아리",
+      "studentIds": [
+        "student-1"
+      ],
+      "createdAt": "2026-04-12T09:00:00+09:00",
+      "updatedAt": "2026-04-12T09:00:00+09:00"
+    },
+    {
+      "id": "club-iris",
+      "name": "아이리스",
+      "category": "댄스동아리",
+      "description": "무대 퍼포먼스와 안무 연습을 진행하는 댄스 동아리",
+      "studentIds": [
+        "student-1"
+      ],
+      "createdAt": "2026-04-12T09:00:00+09:00",
+      "updatedAt": "2026-04-12T09:00:00+09:00"
+    },
+    {
+      "id": "club-1999",
+      "name": "19.99",
+      "category": "밴드동아리",
+      "description": "밴드 합주와 공연 준비를 함께하는 음악 동아리",
+      "studentIds": [
+        "student-1"
+      ],
+      "createdAt": "2026-04-12T09:00:00+09:00",
+      "updatedAt": "2026-04-12T09:00:00+09:00"
+    },
+    {
+      "id": "club-kiwi",
+      "name": "키위",
+      "category": "밴드동아리",
+      "description": "자작곡과 커버 무대를 병행하는 밴드 동아리",
+      "studentIds": [
+        "student-1"
+      ],
+      "createdAt": "2026-04-12T09:00:00+09:00",
+      "updatedAt": "2026-04-12T09:00:00+09:00"
+    },
+    {
+      "id": "club-pounding",
+      "name": "파운딩",
+      "category": "이종격투기동아리",
+      "description": "기초 체력과 기술 훈련을 중심으로 하는 격투기 동아리",
+      "studentIds": [
+        "student-1"
+      ],
+      "createdAt": "2026-04-12T09:00:00+09:00",
+      "updatedAt": "2026-04-12T09:00:00+09:00"
+    },
+    {
+      "id": "club-flare",
+      "name": "플레어",
+      "category": "요리동아리",
+      "description": "요리 실습과 레시피 개발을 진행하는 요리 동아리",
+      "studentIds": [
+        "student-1"
+      ],
+      "createdAt": "2026-04-12T09:00:00+09:00",
+      "updatedAt": "2026-04-12T09:00:00+09:00"
+    },
+    {
+      "id": "club-famous",
+      "name": "유명인사",
+      "category": "밴드동아리",
+      "description": "공연 기획과 합주를 함께 준비하는 밴드 동아리",
+      "studentIds": [
+        "student-1"
+      ],
+      "createdAt": "2026-04-12T09:00:00+09:00",
+      "updatedAt": "2026-04-12T09:00:00+09:00"
+    },
+    {
+      "id": "club-seasons",
+      "name": "사계절",
+      "category": "이음play기획단",
+      "description": "행사와 콘텐츠를 직접 기획하는 프로젝트 팀",
+      "studentIds": [
+        "student-1"
+      ],
+      "createdAt": "2026-04-12T09:00:00+09:00",
+      "updatedAt": "2026-04-12T09:00:00+09:00"
+    },
+    {
+      "id": "club-neulsom",
+      "name": "늘솜",
+      "category": "공예동아리",
+      "description": "생활 공예와 작품 제작을 실습하는 공예 동아리",
+      "studentIds": [
+        "student-1"
+      ],
+      "createdAt": "2026-04-12T09:00:00+09:00",
+      "updatedAt": "2026-04-12T09:00:00+09:00"
+    },
+    {
+      "id": "club-more",
+      "name": "모어",
+      "category": "댄스동아리",
+      "description": "팀 퍼포먼스와 영상 촬영을 병행하는 댄스 동아리",
+      "studentIds": [
+        "student-1"
+      ],
+      "createdAt": "2026-04-12T09:00:00+09:00",
+      "updatedAt": "2026-04-12T09:00:00+09:00"
+    }
+  ],
+  "reports": [
+    {
+      "id": "report-focus-001",
+      "clubId": "club-focus",
+      "studentId": "student-1",
+      "authorName": "김하늘",
+      "reportDate": "2026-04-05",
+      "startTime": "13:00",
+      "endTime": "15:00",
+      "place": "센터 미디어실",
+      "title": "봄 전시회 촬영 워크숍",
+      "content": "참여자들은 전시 주제에 맞는 사진을 촬영하기 위해 조도와 구도를 먼저 점검했다. 촬영 전에는 샘플 사진을 함께 보며 피사체와 배경의 균형을 어떻게 맞출지 이야기했고, 실제 촬영에서는 인물 사진과 소품 사진을 번갈아 시도했다. 촬영이 끝난 뒤에는 각자 결과물을 모아 좋은 점과 아쉬운 점을 정리하며 다음 촬영에서 보완할 기준을 함께 세웠다.",
+      "reflection": "이번 활동에서는 같은 공간에서도 구도와 거리 차이에 따라 사진의 분위기가 크게 달라진다는 점을 직접 느낄 수 있었다. 참여자들이 서로의 촬영 결과를 비교하며 자연스럽게 피드백을 주고받는 분위기가 좋았고, 초반보다 후반에 훨씬 더 자신 있게 촬영에 참여했다. 다음에는 빛 조절 장비를 조금 더 활용해 표현 범위를 넓혀 보면 좋겠다는 의견이 많았다.",
+      "status": "SUBMITTED",
+      "participants": [
+        {
+          "id": "participant-1",
+          "name": "김하늘",
+          "gender": "FEMALE",
+          "ageGroup": "HIGH"
+        },
+        {
+          "id": "participant-2",
+          "name": "박준서",
+          "gender": "MALE",
+          "ageGroup": "HIGH"
+        },
+        {
+          "id": "participant-3",
+          "name": "최민아",
+          "gender": "FEMALE",
+          "ageGroup": "LATE_YOUTH"
+        }
+      ],
+      "photos": [
+        {
+          "id": "photo-1",
+          "name": "사진1",
+          "url": "/globe.svg",
+          "storagePath": "public/globe.svg",
+          "sizeMb": 0.01
+        },
+        {
+          "id": "photo-2",
+          "name": "사진2",
+          "url": "/window.svg",
+          "storagePath": "public/window.svg",
+          "sizeMb": 0.01
+        }
+      ],
+      "activities": [
+        {
+          "id": "activity-1",
+          "title": "촬영 기획",
+          "bullets": [
+            "촬영 주제와 장면 구성을 함께 정리했다.",
+            "샘플 사진을 보며 구도 기준을 맞췄다."
+          ]
+        },
+        {
+          "id": "activity-2",
+          "title": "현장 실습",
+          "bullets": [
+            "인물 사진과 소품 사진을 번갈아 촬영했다.",
+            "결과물을 확인하며 다음 촬영 기준을 정리했다."
+          ]
+        }
+      ],
+      "rating": 4,
+      "nextActivityDate": "2026-04-12",
+      "nextActivityContent": "센터 야외 공간에서 자연광 촬영과 보정 실습을 진행한다.",
+      "suggestions": "삼각대 수량이 조금 더 확보되면 초반 준비 시간이 줄어들 것 같다.",
+      "pdfTruncated": true,
+      "createdAt": "2026-04-12T09:00:00+09:00",
+      "updatedAt": "2026-04-12T09:00:00+09:00",
+      "pdfTruncationNote": "출력 내용이 1페이지 높이를 초과했습니다.",
+      "pdfCheckedAt": "2026-04-12T13:04:09.633Z"
+    },
+    {
+      "id": "report-maeil-001",
+      "clubId": "club-maeil",
+      "studentId": "student-1",
+      "authorName": "김하늘",
+      "reportDate": "2026-04-08",
+      "startTime": "14:00",
+      "endTime": "16:00",
+      "place": "강당",
+      "title": "캠페인 발표 연습",
+      "content": "참여자들은 지역 캠페인 발표를 앞두고 발표 순서를 정리하고 각자 맡은 파트를 다시 점검했다. 첫 번째 연습에서는 전달력이 부족한 부분을 메모했고, 두 번째 연습에서는 시선 처리와 목소리 크기를 중심으로 보완했다. 발표 자료에 들어가는 문장을 더 짧고 분명하게 정리하면서 핵심 메시지를 한눈에 보이도록 다시 배열했고, 마지막에는 질의응답 상황을 가정해 답변 연습도 함께 진행했다.",
+      "reflection": "발표를 반복할수록 참여자들의 긴장이 줄어들고 서로를 도와주는 분위기가 더 자연스러워졌다. 특히 문장을 짧게 다듬는 과정에서 전달하고 싶은 핵심이 더 분명해졌다는 반응이 많았다. 다만 발표 시간이 길어질수록 뒤쪽 팀의 집중력이 조금 떨어지는 경향이 있었기 때문에, 다음 활동에서는 중간 휴식이나 소규모 피드백 시간을 더 자주 넣는 편이 좋겠다는 생각이 들었다.",
+      "status": "DRAFT",
+      "participants": [
+        {
+          "id": "participant-4",
+          "name": "김하늘",
+          "gender": "FEMALE",
+          "ageGroup": "HIGH"
+        },
+        {
+          "id": "participant-5",
+          "name": "이수민",
+          "gender": "FEMALE",
+          "ageGroup": "HIGH"
+        },
+        {
+          "id": "participant-6",
+          "name": "홍서윤",
+          "gender": "FEMALE",
+          "ageGroup": "MIDDLE"
+        },
+        {
+          "id": "participant-7",
+          "name": "박준서",
+          "gender": "MALE",
+          "ageGroup": "HIGH"
+        }
+      ],
+      "photos": [
+        {
+          "id": "photo-3",
+          "name": "사진1",
+          "url": "/window.svg",
+          "storagePath": "public/window.svg",
+          "sizeMb": 0.01
+        },
+        {
+          "id": "photo-4",
+          "name": "사진2",
+          "url": "/globe.svg",
+          "storagePath": "public/globe.svg",
+          "sizeMb": 0.01
+        }
+      ],
+      "activities": [
+        {
+          "id": "activity-3",
+          "title": "발표 리허설",
+          "bullets": [
+            "팀별 발표 순서를 따라 전체 리허설을 진행했다.",
+            "시선 처리와 속도에 대한 피드백을 정리했다."
+          ]
+        }
+      ],
+      "rating": 3,
+      "nextActivityDate": "2026-04-15",
+      "nextActivityContent": "캠페인 현장 진행 리허설과 역할 점검을 진행한다.",
+      "suggestions": "무선 마이크 상태를 미리 점검하면 발표 집중도가 더 올라갈 것 같다.",
+      "pdfTruncated": false,
+      "createdAt": "2026-04-12T09:00:00+09:00",
+      "updatedAt": "2026-04-12T09:00:00+09:00"
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+enum AgeGroup {
+  ELEMENTARY
+  MIDDLE
+  HIGH
+  LATE_YOUTH
+  YOUNG_ADULT
+}
+
+enum ReportStatus {
+  DRAFT
+  SUBMITTED
+}
+
+model Student {
+  id           String         @id @default(cuid())
+  name         String
+  clubs        StudentClub[]
+  reports      ActivityReport[]
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+}
+
+model Admin {
+  id           String   @id @default(cuid())
+  name         String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Club {
+  id           String         @id @default(cuid())
+  name         String
+  description  String
+  students     StudentClub[]
+  reports      ActivityReport[]
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+}
+
+model StudentClub {
+  id           String   @id @default(cuid())
+  studentId    String
+  clubId       String
+  student      Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  club         Club     @relation(fields: [clubId], references: [id], onDelete: Cascade)
+
+  @@unique([studentId, clubId])
+}
+
+model ActivityReport {
+  id                  String              @id @default(cuid())
+  clubId              String
+  studentId           String
+  reportDate          DateTime
+  title               String
+  content             String
+  reflection          String
+  status              ReportStatus        @default(DRAFT)
+  pdfTruncated        Boolean             @default(false)
+  pdfTruncationNote   String?
+  club                Club                @relation(fields: [clubId], references: [id], onDelete: Cascade)
+  student             Student             @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  activities          ReportActivity[]
+  participants        ReportParticipant[]
+  photos              ReportPhoto[]
+  createdAt           DateTime            @default(now())
+  updatedAt           DateTime            @updatedAt
+}
+
+model ReportActivity {
+  id                  String         @id @default(cuid())
+  activityReportId    String
+  title               String
+  sortOrder           Int
+  report              ActivityReport @relation(fields: [activityReportId], references: [id], onDelete: Cascade)
+  bullets             ReportActivityBullet[]
+}
+
+model ReportActivityBullet {
+  id                  String         @id @default(cuid())
+  activityId          String
+  content             String
+  sortOrder           Int
+  activity            ReportActivity @relation(fields: [activityId], references: [id], onDelete: Cascade)
+}
+
+model ReportParticipant {
+  id                  String         @id @default(cuid())
+  activityReportId    String
+  name                String
+  gender              Gender
+  ageGroup            AgeGroup
+  report              ActivityReport @relation(fields: [activityReportId], references: [id], onDelete: Cascade)
+}
+
+model ReportPhoto {
+  id                  String         @id @default(cuid())
+  activityReportId    String
+  fileName            String
+  filePath            String
+  fileSizeBytes       Int
+  sortOrder           Int
+  report              ActivityReport @relation(fields: [activityReportId], references: [id], onDelete: Cascade)
+
+  @@unique([activityReportId, sortOrder])
+}
