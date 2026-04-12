@@ -9,8 +9,8 @@ export default async function AdminHomePage() {
 
   return (
     <AppShell
-      eyebrow="Admin"
       title="매아리 활동일지 관리자 페이지"
+      backHref="/"
       actions={
         <Link
           href="/admin/clubs/new"

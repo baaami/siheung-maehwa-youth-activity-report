@@ -8,6 +8,7 @@ type ReportListTableProps = {
   selectable?: boolean;
   showAuthor?: boolean;
   checkboxName?: string;
+  showPdfColumn?: boolean;
 };
 
 export function ReportListTable({
@@ -16,6 +17,7 @@ export function ReportListTable({
   selectable = false,
   showAuthor = false,
   checkboxName = "reportIds",
+  showPdfColumn = true,
 }: ReportListTableProps) {
   return (
     <div className="overflow-hidden rounded-[24px] border border-[var(--line)] bg-white">
@@ -27,7 +29,7 @@ export function ReportListTable({
             <th className="px-4 py-3">활동명</th>
             <th className="px-4 py-3">참여 인원</th>
             {showAuthor ? <th className="px-4 py-3">작성자</th> : null}
-            <th className="px-4 py-3">PDF</th>
+            {showPdfColumn ? <th className="px-4 py-3">PDF</th> : null}
             <th className="px-4 py-3">상세</th>
           </tr>
         </thead>
@@ -49,15 +51,17 @@ export function ReportListTable({
               <td className="px-4 py-3 font-medium">{report.title}</td>
               <td className="px-4 py-3">{totalParticipants(report.participants)}명</td>
               {showAuthor ? <td className="px-4 py-3">{report.authorName}</td> : null}
-              <td className="px-4 py-3">
-                {report.status !== "SUBMITTED" ? (
-                  <span className="text-xs font-semibold text-[var(--muted)]">제출 후 가능</span>
-                ) : report.pdfTruncated ? (
-                  <span className="text-xs font-semibold text-[var(--warning)]">일부 잘림</span>
-                ) : (
-                  <span className="text-xs font-semibold text-emerald-700">정상</span>
-                )}
-              </td>
+              {showPdfColumn ? (
+                <td className="px-4 py-3">
+                  {report.status !== "SUBMITTED" ? (
+                    <span className="text-xs font-semibold text-[var(--muted)]">제출 후 가능</span>
+                  ) : report.pdfTruncated ? (
+                    <span className="text-xs font-semibold text-[var(--warning)]">일부 잘림</span>
+                  ) : (
+                    <span className="text-xs font-semibold text-emerald-700">정상</span>
+                  )}
+                </td>
+              ) : null}
               <td className="px-4 py-3">
                 <Link className="font-medium text-[var(--accent)]" href={`${basePath}/${report.id}`}>
                   보기

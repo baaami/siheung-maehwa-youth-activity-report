@@ -17,8 +17,8 @@ export default async function AdminEditClubPage({
 
   return (
     <AppShell
-      eyebrow="Admin / Club Edit"
       title={`${club.name} 수정`}
+      backHref={`/admin/clubs/${club.id}`}
     >
       <ClubForm mode="edit" club={club} />
     </AppShell>

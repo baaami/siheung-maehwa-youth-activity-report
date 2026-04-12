@@ -1,6 +1,7 @@
 "use client";
 
 import { startTransition, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { AGE_GROUPS, GENDERS, ageGroupLabels, genderLabels } from "@/lib/constants";
 import { createEmptyParticipant, formatTimeRange, reportCharacterState } from "@/lib/report-utils";
@@ -15,7 +16,8 @@ type ReportFormProps = {
   readOnly?: boolean;
   submitEndpoint?: string;
   backHref?: string;
-  onCancelEdit?: () => void;
+  formId?: string;
+  showFooterActions?: boolean;
 };
 
 type FormState = {
@@ -57,7 +59,8 @@ export function ReportForm({
   readOnly = false,
   submitEndpoint,
   backHref,
-  onCancelEdit,
+  formId,
+  showFooterActions = true,
 }: ReportFormProps) {
   const router = useRouter();
   const [form, setForm] = useState<FormState>(() => toFormState(report));
@@ -66,7 +69,7 @@ export function ReportForm({
   const [message, setMessage] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  async function submit(status: ActivityReport["status"]) {
+  async function submit() {
     if (!submitEndpoint) {
       return;
     }
@@ -86,7 +89,7 @@ export function ReportForm({
     formData.set("suggestions", form.suggestions);
     formData.set("existingPhotos", JSON.stringify(existingPhotos));
     formData.set("expectedUpdatedAt", report.updatedAt);
-    formData.set("status", status);
+    formData.set("status", "SUBMITTED");
 
     photoFiles.forEach((file, index) => {
       if (file) {
@@ -122,9 +125,11 @@ export function ReportForm({
 
   return (
     <form
+      id={formId}
       className="space-y-6"
       onSubmit={(event) => {
         event.preventDefault();
+        void submit();
       }}
     >
       <section className="app-card rounded-[24px] p-6">
@@ -134,13 +139,8 @@ export function ReportForm({
               기본 정보
             </h2>
           </div>
-          <span className="rounded-full bg-[var(--surface-strong)] px-3 py-1 text-xs font-semibold text-[var(--accent)]">
-            {mode === "student" ? "학생 입력 화면" : "관리자 수정 화면"}
-          </span>
         </div>
         <div className="grid gap-4 md:grid-cols-2">
-          <Field label="동아리명" value={`${club.category} ${club.name}`} readOnly />
-          <Field label="작성자" value={report.authorName} readOnly />
           <Field
             label="활동일자"
             value={form.reportDate}
@@ -170,7 +170,7 @@ export function ReportForm({
       <section className="app-card rounded-[24px] p-6">
         <div className="mb-5 flex items-center justify-between">
           <div className="space-y-2">
-            <h2 className="text-2xl font-semibold text-[var(--accent-strong)]">개별 입력과 자동 집계</h2>
+            <h2 className="text-2xl font-semibold text-[var(--accent-strong)]">참여자 명단</h2>
           </div>
           <button
             type="button"
@@ -336,22 +336,34 @@ export function ReportForm({
           {[0, 1].map((index) => {
             const nextFile = photoFiles[index];
             const currentPhoto = existingPhotos[index];
+            const inputId = `photo-upload-${index}`;
 
             return (
               <div key={index} className="rounded-[20px] border border-[var(--line)] bg-white p-4">
-                <div
-                  className="h-52 rounded-[16px] border border-dashed border-[var(--line)] bg-cover bg-center"
-                  style={{
-                    backgroundImage: nextFile
-                      ? `url(${URL.createObjectURL(nextFile)})`
-                      : currentPhoto
-                        ? `url(${currentPhoto.url})`
-                        : undefined,
-                  }}
-                />
+                <label
+                  htmlFor={inputId}
+                  className="group block cursor-pointer"
+                >
+                  <div
+                    className="relative h-52 rounded-[16px] border border-dashed border-[var(--line)] bg-cover bg-center transition group-hover:border-[var(--accent)]"
+                    style={{
+                      backgroundImage: nextFile
+                        ? `url(${URL.createObjectURL(nextFile)})`
+                        : currentPhoto
+                          ? `url(${currentPhoto.url})`
+                          : undefined,
+                    }}
+                  >
+                    <div className="absolute inset-0 rounded-[16px] bg-black/0 transition group-hover:bg-black/10" />
+                    <div className="absolute bottom-3 right-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-[var(--accent-strong)] shadow-sm">
+                      클릭하여 업로드
+                    </div>
+                  </div>
+                </label>
                 <div className="mt-3 space-y-2">
                   <p className="text-sm font-semibold text-[var(--foreground)]">사진 {index + 1}</p>
                   <input
+                    id={inputId}
                     type="file"
                     accept="image/*"
                     onChange={(event) =>
@@ -383,41 +395,26 @@ export function ReportForm({
         </div>
       ) : null}
 
-      <div className="flex flex-wrap items-center gap-3">
-        {onCancelEdit ? (
+      {showFooterActions ? (
+        <div className="flex flex-wrap items-center gap-3">
+          {backHref ? (
+            <button
+              type="button"
+              className="rounded-full border border-[var(--line)] px-4 py-2 text-sm font-semibold text-[var(--muted)]"
+              onClick={() => router.push(backHref)}
+            >
+              뒤로 가기
+            </button>
+          ) : null}
           <button
-            type="button"
-            className="rounded-full border border-[var(--line)] px-4 py-2 text-sm font-semibold text-[var(--muted)]"
-            onClick={onCancelEdit}
+            type="submit"
+            className="rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-white"
+            disabled={isSubmitting}
           >
-            취소
+            {isSubmitting ? "완료 중..." : "완료"}
           </button>
-        ) : backHref ? (
-          <button
-            type="button"
-            className="rounded-full border border-[var(--line)] px-4 py-2 text-sm font-semibold text-[var(--muted)]"
-            onClick={() => router.push(backHref)}
-          >
-            뒤로 가기
-          </button>
-        ) : null}
-        <button
-          type="button"
-          className="rounded-full border border-[var(--line)] px-5 py-3 text-sm font-semibold text-[var(--accent)]"
-          disabled={isSubmitting}
-          onClick={() => void submit("DRAFT")}
-        >
-          {isSubmitting ? "저장 중..." : "임시 저장"}
-        </button>
-        <button
-          type="button"
-          className="rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-semibold text-white"
-          disabled={isSubmitting}
-          onClick={() => void submit("SUBMITTED")}
-        >
-          {isSubmitting ? "완료 중..." : "완료"}
-        </button>
-      </div>
+        </div>
+      ) : null}
     </form>
   );
 }
@@ -496,12 +493,24 @@ function ReportReadOnlyContent({
       <section className="app-card rounded-[24px] p-6">
         <h2 className="mb-5 text-2xl font-semibold text-[var(--accent-strong)]">활동 사진</h2>
         <div className="grid gap-4 md:grid-cols-2">
-          {report.photos.map((photo) => (
+          {report.photos.map((photo, index) => (
             <div key={photo.id} className="rounded-[20px] border border-[var(--line)] bg-white p-4">
-              <div
-                className="h-52 rounded-[16px] bg-cover bg-center"
-                style={{ backgroundImage: `url(${photo.url})` }}
-              />
+              <div className="relative">
+                <div
+                  className="h-52 rounded-[16px] bg-cover bg-center"
+                  style={{ backgroundImage: `url(${photo.url})` }}
+                />
+                {mode === "admin" ? (
+                  <Link
+                    href={`/api/admin/reports/${report.id}/photos/${photo.id}`}
+                    className="absolute right-3 top-3 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-[var(--accent-strong)] shadow-sm transition hover:bg-white"
+                    aria-label={`사진 ${index + 1} 다운로드`}
+                    title={`사진 ${index + 1} 다운로드`}
+                  >
+                    <span className="text-lg leading-none">↓</span>
+                  </Link>
+                ) : null}
+              </div>
               <div className="mt-3 flex items-center justify-between text-sm">
                 <span className="font-medium text-[var(--foreground)]">{photo.name}</span>
                 <span className="text-[var(--muted)]">{photo.sizeMb}MB</span>

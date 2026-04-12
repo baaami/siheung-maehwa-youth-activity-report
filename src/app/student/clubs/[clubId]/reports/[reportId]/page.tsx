@@ -1,7 +1,6 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AppShell } from "@/components/layout/app-shell";
-import { ReportForm } from "@/components/reports/report-form";
+import { StudentReportDetailClient } from "@/components/reports/student-report-detail-client";
 import { getClubById, getReportById } from "@/lib/repository";
 
 export default async function StudentReportDetailPage({
@@ -24,20 +23,13 @@ export default async function StudentReportDetailPage({
 
   return (
     <AppShell
-      eyebrow="Student / Report"
       title={report.title}
-      actions={
-        report.status === "DRAFT" ? (
-          <Link
-            href={`/student/clubs/${clubId}/reports/${report.id}/edit`}
-            className="rounded-full bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[var(--accent-strong)]"
-          >
-            수정 화면
-          </Link>
-        ) : undefined
-      }
     >
-      <ReportForm club={club} report={report} mode="student" readOnly />
+      <StudentReportDetailClient
+        club={club}
+        report={report}
+        backHref={`/student/clubs/${clubId}`}
+      />
     </AppShell>
   );
 }

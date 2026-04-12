@@ -11,7 +11,7 @@ export default async function EditStudentReportPage({
   const { clubId, reportId } = await params;
   const report = await getReportById(reportId);
 
-  if (!report || report.clubId !== clubId || report.status === "SUBMITTED") {
+  if (!report || report.clubId !== clubId) {
     notFound();
   }
 
@@ -23,8 +23,8 @@ export default async function EditStudentReportPage({
 
   return (
     <AppShell
-      eyebrow="Student / Edit"
       title={`${report.title} 수정`}
+      backHref={`/student/clubs/${clubId}/reports/${report.id}`}
     >
       <ReportForm
         club={club}

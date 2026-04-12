@@ -91,7 +91,7 @@ export function createEmptyReport(clubId: string, authorName: string): ActivityR
     id: "draft-preview",
     clubId,
     studentId: "student-1",
-    authorName,
+    authorName: authorName || "",
     reportDate: "",
     startTime: "",
     endTime: "",

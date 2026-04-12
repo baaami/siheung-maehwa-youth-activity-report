@@ -20,8 +20,8 @@ export default async function AdminClubPage({
 
   return (
     <AppShell
-      eyebrow="Admin / Club"
       title={club.name}
+      backHref="/admin"
       actions={
         <div className="flex gap-3">
           <Link

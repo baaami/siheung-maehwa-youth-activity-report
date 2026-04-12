@@ -23,7 +23,6 @@ export default async function AdminReportDetailPage({
 
   return (
     <AppShell
-      eyebrow="Admin / Report Detail"
       title={report.title}
     >
       <AdminReportDetailClient

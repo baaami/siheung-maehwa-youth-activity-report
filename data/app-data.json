@@ -251,7 +251,7 @@
       "title": "캠페인 발표 연습",
       "content": "참여자들은 지역 캠페인 발표를 앞두고 발표 순서를 정리하고 각자 맡은 파트를 다시 점검했다. 첫 번째 연습에서는 전달력이 부족한 부분을 메모했고, 두 번째 연습에서는 시선 처리와 목소리 크기를 중심으로 보완했다. 발표 자료에 들어가는 문장을 더 짧고 분명하게 정리하면서 핵심 메시지를 한눈에 보이도록 다시 배열했고, 마지막에는 질의응답 상황을 가정해 답변 연습도 함께 진행했다.",
       "reflection": "발표를 반복할수록 참여자들의 긴장이 줄어들고 서로를 도와주는 분위기가 더 자연스러워졌다. 특히 문장을 짧게 다듬는 과정에서 전달하고 싶은 핵심이 더 분명해졌다는 반응이 많았다. 다만 발표 시간이 길어질수록 뒤쪽 팀의 집중력이 조금 떨어지는 경향이 있었기 때문에, 다음 활동에서는 중간 휴식이나 소규모 피드백 시간을 더 자주 넣는 편이 좋겠다는 생각이 들었다.",
-      "status": "DRAFT",
+      "status": "SUBMITTED",
       "participants": [
         {
           "id": "participant-4",
@@ -280,11 +280,11 @@
       ],
       "photos": [
         {
-          "id": "photo-3",
+          "id": "ccca6d7e-f7bf-43eb-92af-8a6ec725b129",
           "name": "사진1",
-          "url": "/window.svg",
-          "storagePath": "public/window.svg",
-          "sizeMb": 0.01
+          "url": "/uploads/report-maeil-001/1-f8091d92-32eb-4a18-94ff-a92e38d1eebb.jpg",
+          "storagePath": "public/uploads/report-maeil-001/1-f8091d92-32eb-4a18-94ff-a92e38d1eebb.jpg",
+          "sizeMb": 0.19
         },
         {
           "id": "photo-4",
@@ -294,23 +294,16 @@
           "sizeMb": 0.01
         }
       ],
-      "activities": [
-        {
-          "id": "activity-3",
-          "title": "발표 리허설",
-          "bullets": [
-            "팀별 발표 순서를 따라 전체 리허설을 진행했다.",
-            "시선 처리와 속도에 대한 피드백을 정리했다."
-          ]
-        }
-      ],
+      "activities": [],
       "rating": 3,
       "nextActivityDate": "2026-04-15",
       "nextActivityContent": "캠페인 현장 진행 리허설과 역할 점검을 진행한다.",
       "suggestions": "무선 마이크 상태를 미리 점검하면 발표 집중도가 더 올라갈 것 같다.",
-      "pdfTruncated": false,
+      "pdfTruncated": true,
       "createdAt": "2026-04-12T09:00:00+09:00",
-      "updatedAt": "2026-04-12T09:00:00+09:00"
+      "updatedAt": "2026-04-12T13:46:47.991Z",
+      "pdfTruncationNote": "출력 내용이 1페이지 높이를 초과했습니다.",
+      "pdfCheckedAt": "2026-04-12T13:48:50.078Z"
     }
   ]
 }

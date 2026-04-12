@@ -5,19 +5,19 @@ import Link from "next/link";
 import { ReportForm } from "@/components/reports/report-form";
 import type { ActivityReport, Club } from "@/lib/types";
 
-type AdminReportDetailClientProps = {
+type StudentReportDetailClientProps = {
   club: Club;
   report: ActivityReport;
   backHref: string;
 };
 
-export function AdminReportDetailClient({
+export function StudentReportDetailClient({
   club,
   report,
   backHref,
-}: AdminReportDetailClientProps) {
+}: StudentReportDetailClientProps) {
   const [isEditing, setIsEditing] = useState(false);
-  const formId = `admin-report-form-${report.id}`;
+  const formId = `student-report-form-${report.id}`;
 
   return (
     <div className="space-y-4">
@@ -40,12 +40,6 @@ export function AdminReportDetailClient({
           </button>
         )}
         <Link
-          href={`/api/admin/reports/${report.id}/pdf`}
-          className="rounded-full border border-[var(--line)] px-4 py-2 text-sm font-semibold text-[var(--muted)]"
-        >
-          PDF 다운로드
-        </Link>
-        <Link
           href={backHref}
           className="rounded-full border border-[var(--line)] px-4 py-2 text-sm font-semibold text-[var(--muted)]"
         >
@@ -56,9 +50,9 @@ export function AdminReportDetailClient({
       <ReportForm
         club={club}
         report={report}
-        mode="admin"
+        mode="student"
         readOnly={!isEditing}
-        submitEndpoint={`/api/admin/clubs/${club.id}/reports/${report.id}`}
+        submitEndpoint={`/api/student/clubs/${club.id}/reports/${report.id}`}
         formId={formId}
         showFooterActions={false}
       />

@@ -19,8 +19,8 @@ export default async function NewStudentReportPage({
 
   return (
     <AppShell
-      eyebrow="Student / New Report"
       title={`${club.name} 활동일지 작성`}
+      backHref={`/student/clubs/${club.id}`}
     >
       <ReportForm
         club={club}

@@ -20,8 +20,8 @@ export default async function StudentClubPage({
 
   return (
     <AppShell
-      eyebrow="Student / Club"
       title={club.name}
+      backHref="/student"
       actions={
         <Link
           href={`/student/clubs/${club.id}/reports/new`}
@@ -42,6 +42,7 @@ export default async function StudentClubPage({
         <ReportListTable
           reports={reports}
           basePath={`/student/clubs/${club.id}/reports`}
+          showPdfColumn={false}
         />
       </div>
     </AppShell>

@@ -228,7 +228,7 @@ export async function createReportForStudent({
     id: reportId,
     clubId,
     studentId: currentStudentId,
-    authorName: (await getCurrentStudent()).name,
+    authorName: "",
     reportDate: input.reportDate,
     startTime: input.startTime,
     endTime: input.endTime,
@@ -302,7 +302,7 @@ export async function updateReportAsStudent({
   const data = await readData();
   const report = data.reports.find((item) => item.id === reportId && item.clubId === clubId);
 
-  if (!report || report.studentId !== currentStudentId || report.status === "SUBMITTED") {
+  if (!report || report.studentId !== currentStudentId) {
     return undefined;
   }
 

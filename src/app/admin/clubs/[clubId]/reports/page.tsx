@@ -28,8 +28,8 @@ export default async function AdminReportsPage({
 
   return (
     <AppShell
-      eyebrow="Admin / Reports"
       title={`${club.name} 활동일지 관리`}
+      backHref={`/admin/clubs/${club.id}`}
       actions={filteredReports[0] || reports[0] ? (
         <Link
           href={`/reports/${filteredReports[0]?.id ?? reports[0]?.id}/print`}
