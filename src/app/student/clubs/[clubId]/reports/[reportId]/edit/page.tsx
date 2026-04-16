@@ -25,6 +25,7 @@ export default async function EditStudentReportPage({
     <AppShell
       title={`${report.title} 수정`}
       backHref={`/student/clubs/${clubId}/reports/${report.id}`}
+      homeHref="/student"
     >
       <ReportForm
         club={club}

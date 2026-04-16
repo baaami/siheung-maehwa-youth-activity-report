@@ -303,6 +303,52 @@
       "updatedAt": "2026-04-12T13:46:47.991Z",
       "pdfTruncationNote": "출력 내용이 1페이지 높이를 초과했습니다.",
       "pdfCheckedAt": "2026-04-12T13:48:50.078Z"
+    },
+    {
+      "id": "report-56555cd5-957c-4945-9e5e-dd6670f2ab91",
+      "clubId": "club-focus",
+      "studentId": "student-1",
+      "authorName": "",
+      "reportDate": "2026-04-07",
+      "startTime": "23:12",
+      "endTime": "23:13",
+      "place": "가낟다",
+      "title": "동아리방 사진",
+      "content": "동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진",
+      "reflection": "동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진동아리방 사진",
+      "status": "SUBMITTED",
+      "participants": [
+        {
+          "id": "82b48f04-54e6-4e64-b6f1-cead36ddf6bb",
+          "name": "이성범",
+          "gender": "FEMALE",
+          "ageGroup": "HIGH"
+        }
+      ],
+      "photos": [
+        {
+          "id": "194fa623-85c8-41c3-a99f-c63b49368b0d",
+          "name": "사진1",
+          "url": "/uploads/report-56555cd5-957c-4945-9e5e-dd6670f2ab91/1-cb00255e-7f30-4830-b663-98e56b0d82b8.jpg",
+          "storagePath": "public/uploads/report-56555cd5-957c-4945-9e5e-dd6670f2ab91/1-cb00255e-7f30-4830-b663-98e56b0d82b8.jpg",
+          "sizeMb": 0.03
+        },
+        {
+          "id": "4f221069-dbce-4e87-9427-e825f23659ca",
+          "name": "사진2",
+          "url": "/uploads/report-56555cd5-957c-4945-9e5e-dd6670f2ab91/2-fc861d49-c07e-41f4-91bc-03081090d45d.jpg",
+          "storagePath": "public/uploads/report-56555cd5-957c-4945-9e5e-dd6670f2ab91/2-fc861d49-c07e-41f4-91bc-03081090d45d.jpg",
+          "sizeMb": 0.03
+        }
+      ],
+      "activities": [],
+      "rating": 3,
+      "nextActivityDate": "2026-04-22",
+      "nextActivityContent": "사진 수정",
+      "suggestions": "",
+      "pdfTruncated": false,
+      "createdAt": "2026-04-12T14:10:06.416Z",
+      "updatedAt": "2026-04-12T14:10:06.416Z"
     }
   ]
 }

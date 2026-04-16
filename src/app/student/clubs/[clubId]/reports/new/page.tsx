@@ -21,6 +21,7 @@ export default async function NewStudentReportPage({
     <AppShell
       title={`${club.name} 활동일지 작성`}
       backHref={`/student/clubs/${club.id}`}
+      homeHref="/student"
     >
       <ReportForm
         club={club}

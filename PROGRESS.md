@@ -26,6 +26,7 @@
 - 로컬 `next start` 후 HTTP 경로 확인
 - 학생 multipart 업로드 API 실호출 검증
 - 관리자 단일/묶음 PDF 다운로드 HTTP 응답 검증
+- `pdf-lib` 런타임 의존성 누락 수정과 `package-lock.json` 정합성 복구
 
 ## 최근 변경 사항
 
@@ -34,6 +35,7 @@
 - PDF 출력 레이아웃을 `public/activity-report-pdf-format.png` 기준으로 재구성했다.
 - 사진은 `public/uploads/<reportId>/` 아래에 저장하도록 설계했다.
 - 로컬 서버에서 `/`, `/student`, `/admin`, `/reports/report-focus-001/print`, 학생 생성 API, 사진 다운로드 API, PDF 다운로드 API를 직접 호출해 응답을 확인했다.
+- Vercel 빌드 실패 원인이던 `pdf-lib` 미선언 상태를 수정했고, lockfile 루트 패키지명도 실제 프로젝트명으로 정리했다.
 
 ## 진행 중인 작업
 

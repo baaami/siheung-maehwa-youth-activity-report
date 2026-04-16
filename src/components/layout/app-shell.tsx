@@ -7,6 +7,7 @@ type AppShellProps = {
   children: ReactNode;
   actions?: ReactNode;
   backHref?: string;
+  homeHref?: string;
 };
 
 export function AppShell({
@@ -15,6 +16,7 @@ export function AppShell({
   children,
   actions,
   backHref,
+  homeHref,
 }: AppShellProps) {
   return (
     <div className="page-shell">
@@ -41,6 +43,14 @@ export function AppShell({
                   className="rounded-full border border-[var(--line)] px-4 py-2 text-sm font-medium text-[var(--muted)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
                 >
                   뒤로 가기
+                </Link>
+              ) : null}
+              {homeHref ? (
+                <Link
+                  href={homeHref}
+                  className="rounded-full border border-[var(--line)] px-4 py-2 text-sm font-medium text-[var(--muted)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                >
+                  홈으로
                 </Link>
               ) : null}
             </div>

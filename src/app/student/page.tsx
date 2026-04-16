@@ -9,7 +9,6 @@ export default async function StudentHomePage() {
   return (
     <AppShell
       title="매아리 활동일지"
-      backHref="/"
     >
       <div className="grid gap-5 md:grid-cols-2">
         {clubs.map((club) => (

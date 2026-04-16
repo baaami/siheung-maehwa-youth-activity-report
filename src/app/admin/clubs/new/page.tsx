@@ -6,6 +6,7 @@ export default function AdminNewClubPage() {
     <AppShell
       title="동아리 추가"
       backHref="/admin"
+      homeHref="/admin"
     >
       <ClubForm mode="create" />
     </AppShell>

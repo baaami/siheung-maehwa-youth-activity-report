@@ -23,6 +23,7 @@ export function StudentReportDetailClient({
     <AppShell
       title={report.title}
       backHref={backHref}
+      homeHref="/student"
       actions={
         isEditing ? (
           <button

@@ -24,6 +24,7 @@ export function AdminReportDetailClient({
     <AppShell
       title={report.title}
       backHref={backHref}
+      homeHref="/admin"
       actions={
         <>
           {isEditing ? (

@@ -22,6 +22,7 @@ export default async function AdminClubPage({
     <AppShell
       title={club.name}
       backHref="/admin"
+      homeHref="/admin"
       actions={
         <div className="flex gap-3">
           <Link

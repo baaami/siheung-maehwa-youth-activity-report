@@ -431,13 +431,8 @@ function ReportReadOnlyContent({
   return (
     <div className="space-y-6">
       <section className="app-card rounded-[24px] p-6">
-        <div className="mb-5 flex items-center justify-between">
-          <div>
-            <h2 className="text-2xl font-semibold text-[var(--accent-strong)]">기본 정보</h2>
-          </div>
-          <span className="rounded-full bg-[var(--surface-strong)] px-3 py-1 text-xs font-semibold text-[var(--accent)]">
-            {mode === "student" ? "학생 읽기 화면" : "관리자 읽기 화면"}
-          </span>
+        <div className="mb-5">
+          <h2 className="text-2xl font-semibold text-[var(--accent-strong)]">기본 정보</h2>
         </div>
         <div className="grid gap-4 md:grid-cols-2">
           <DisplayField label="동아리명" value={`${club.category} ${club.name}`} />

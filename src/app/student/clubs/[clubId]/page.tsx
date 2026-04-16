@@ -22,6 +22,7 @@ export default async function StudentClubPage({
     <AppShell
       title={club.name}
       backHref="/student"
+      homeHref="/student"
       actions={
         <Link
           href={`/student/clubs/${club.id}/reports/new`}
