@@ -27,6 +27,8 @@
 - 학생 multipart 업로드 API 실호출 검증
 - 관리자 단일/묶음 PDF 다운로드 HTTP 응답 검증
 - `pdf-lib` 런타임 의존성 누락 수정과 `package-lock.json` 정합성 복구
+- 사진 다운로드 응답에 실제 이미지 MIME 타입과 브라우저 호환 파일명을 적용해 JPEG가 `.bin` 대신 `.jpg`로 저장되도록 수정
+- 확장자 없는 JPEG 업로드도 MIME 타입을 기준으로 `.jpg` 확장자를 붙여 저장하도록 보완
 
 ## 최근 변경 사항
 
@@ -36,6 +38,7 @@
 - 사진은 `public/uploads/<reportId>/` 아래에 저장하도록 설계했다.
 - 로컬 서버에서 `/`, `/student`, `/admin`, `/reports/report-focus-001/print`, 학생 생성 API, 사진 다운로드 API, PDF 다운로드 API를 직접 호출해 응답을 확인했다.
 - Vercel 빌드 실패 원인이던 `pdf-lib` 미선언 상태를 수정했고, lockfile 루트 패키지명도 실제 프로젝트명으로 정리했다.
+- 기존 `.bin` 사진 파일도 JPEG/PNG/GIF/WebP 시그니처를 감지해 올바른 확장자와 MIME 타입으로 다운로드하도록 보완했다.
 
 ## 진행 중인 작업
 

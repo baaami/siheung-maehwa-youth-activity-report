@@ -34,9 +34,40 @@ function sanitizeFileSegment(input: string) {
     .toLowerCase() || "file";
 }
 
-function getFileExtension(fileName: string) {
-  const extension = path.extname(fileName).toLowerCase();
-  return extension || ".bin";
+const photoExtensionsByContentType: Record<string, string> = {
+  "image/avif": ".avif",
+  "image/bmp": ".bmp",
+  "image/gif": ".gif",
+  "image/heic": ".heic",
+  "image/heif": ".heif",
+  "image/jpeg": ".jpg",
+  "image/png": ".png",
+  "image/svg+xml": ".svg",
+  "image/tiff": ".tiff",
+  "image/webp": ".webp",
+};
+
+const normalizedPhotoExtensions: Record<string, string> = {
+  ".avif": ".avif",
+  ".bmp": ".bmp",
+  ".gif": ".gif",
+  ".heic": ".heic",
+  ".heif": ".heif",
+  ".jfif": ".jpg",
+  ".jpe": ".jpg",
+  ".jpeg": ".jpg",
+  ".jpg": ".jpg",
+  ".png": ".png",
+  ".svg": ".svg",
+  ".tif": ".tiff",
+  ".tiff": ".tiff",
+  ".webp": ".webp",
+};
+
+function getFileExtension(fileName: string, contentType: string) {
+  const extension = normalizedPhotoExtensions[path.extname(fileName).toLowerCase()];
+
+  return extension ?? photoExtensionsByContentType[contentType.toLowerCase()] ?? ".jpg";
 }
 
 async function saveUploadedPhoto({ reportId, index, file }: SavedPhotoInput): Promise<ReportPhoto> {
@@ -45,7 +76,7 @@ async function saveUploadedPhoto({ reportId, index, file }: SavedPhotoInput): Pr
   }
 
   const buffer = Buffer.from(await file.arrayBuffer());
-  const extension = getFileExtension(file.name);
+  const extension = getFileExtension(file.name, file.type);
   const reportDir = path.join(getUploadsDir(), reportId);
   await mkdir(reportDir, { recursive: true });
 
